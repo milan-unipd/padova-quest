@@ -1,0 +1,130 @@
+{
+  "project_info": {
+    "project_number": "256270436891",
+    "project_id": "padova-quest",
+    "storage_bucket": "padova-quest.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256270436891:android:14581203d341788e7586be",
+        "android_client_info": {
+          "package_name": "com.unipd.milan.padovaquest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256270436891-m12fqfifvsijro247vkbjk58o8cemfk8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unipd.milan.padovaquest",
+            "certificate_hash": "e55a60aab1b7e12c9d5980f5f3e5838cbcb249a4"
+          }
+        },
+        {
+          "client_id": "256270436891-fnmmvs74v0c0jg0jouqe70l6kgqnoqki.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1hvwFemLInVYPjaDRIN9s9qjqyDj104o"
+        },
+        {
+          "current_key": "AIzaSyCxJRY6q_ES9nEHoOynPvu9EmiIdoj-7Ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256270436891-fnmmvs74v0c0jg0jouqe70l6kgqnoqki.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256270436891:android:f1fab1571e7bff4f7586be",
+        "android_client_info": {
+          "package_name": "it.unipd.milan.aaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256270436891-238hrk68kukqblvmodjkahkh85pf5ake.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.unipd.milan.aaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "certificate_hash": "e55a60aab1b7e12c9d5980f5f3e5838cbcb249a4"
+          }
+        },
+        {
+          "client_id": "256270436891-fnmmvs74v0c0jg0jouqe70l6kgqnoqki.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1hvwFemLInVYPjaDRIN9s9qjqyDj104o"
+        },
+        {
+          "current_key": "AIzaSyCxJRY6q_ES9nEHoOynPvu9EmiIdoj-7Ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256270436891-fnmmvs74v0c0jg0jouqe70l6kgqnoqki.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256270436891:android:eb0a990111b586b27586be",
+        "android_client_info": {
+          "package_name": "it.unipd.milan.padovaquest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256270436891-7c1cltikkq79lpp0h3vpc9pflpcjmdc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.unipd.milan.padovaquest",
+            "certificate_hash": "e55a60aab1b7e12c9d5980f5f3e5838cbcb249a4"
+          }
+        },
+        {
+          "client_id": "256270436891-fnmmvs74v0c0jg0jouqe70l6kgqnoqki.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1hvwFemLInVYPjaDRIN9s9qjqyDj104o"
+        },
+        {
+          "current_key": "AIzaSyCxJRY6q_ES9nEHoOynPvu9EmiIdoj-7Ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256270436891-fnmmvs74v0c0jg0jouqe70l6kgqnoqki.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
