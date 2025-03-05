@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_my_personal_quests"
+        android:icon="@drawable/person_24px"
+        android:title="@string/personal_quests" />
+
+    <item
+        android:id="@+id/navigation_my_profile"
+        android:icon="@drawable/account_circle_24px"
+        android:title="@string/my_profile" />
+
+    <item
+        android:id="@+id/navigation_my_group_quests"
+        android:icon="@drawable/groups_24px"
+        android:title="@string/my_group_quests" />
+
+
+</menu>
