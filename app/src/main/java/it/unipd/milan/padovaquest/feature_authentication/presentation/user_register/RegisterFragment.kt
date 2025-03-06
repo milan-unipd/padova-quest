@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import it.unipd.milan.padovaquest.R
+import it.unipd.milan.padovaquest.core.util.EmailVerificator
 import it.unipd.milan.padovaquest.core.util.Resource
 import it.unipd.milan.padovaquest.core.util.repeatOnResumed
 import it.unipd.milan.padovaquest.databinding.FragmentRegisterBinding
@@ -72,7 +73,7 @@ class RegisterFragment : Fragment() {
 
         binding.emailEditText.doAfterTextChanged {
             if (it != null && it.toString().isNotEmpty()) {
-                if (!isValidEmail(it.toString()))
+                if (!EmailVerificator.isValidEmail(it.toString()))
                     binding.emailInputLayout.error = "Invalid email"
                 else
                     binding.emailInputLayout.error = null
@@ -89,7 +90,7 @@ class RegisterFragment : Fragment() {
 
             var hasError = false
 
-            if (!isValidEmail(email)) {
+            if (!EmailVerificator.isValidEmail(email)) {
                 binding.emailInputLayout.error = "Invalid email"
                 hasError = true
             } else {
@@ -142,11 +143,4 @@ class RegisterFragment : Fragment() {
             }
         }
     }
-
-    private fun isValidEmail(email: String): Boolean {
-        val emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-        return email.matches(emailRegex.toRegex())
-    }
-
-
 }

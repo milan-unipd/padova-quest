@@ -25,6 +25,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import it.unipd.milan.padovaquest.R
+import it.unipd.milan.padovaquest.core.util.EmailVerificator
 import it.unipd.milan.padovaquest.core.util.Resource
 import it.unipd.milan.padovaquest.databinding.FragmentLoginBinding
 import it.unipd.milan.padovaquest.shared_quests.domain.model.Quest
@@ -79,7 +80,7 @@ class LoginFragment : Fragment(), PermissionsHelper.PermissionCallback {
                 Toast.makeText(context, "You have to enter your email", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (!isValidEmail(username)) {
+            if (!EmailVerificator.isValidEmail(username)) {
                 Toast.makeText(context, "The email address is badly formated!", Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
@@ -197,11 +198,4 @@ class LoginFragment : Fragment(), PermissionsHelper.PermissionCallback {
             }
         }
     }
-
-    private fun isValidEmail(email: String): Boolean {
-        val emailRegex = "^[A-Za-z](.*)(@)(.+)(\\.)(.+)"
-        return email.matches(emailRegex.toRegex())
-    }
-
-
 }
