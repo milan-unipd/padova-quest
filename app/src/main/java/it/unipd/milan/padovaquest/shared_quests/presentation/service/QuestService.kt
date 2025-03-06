@@ -53,7 +53,7 @@ class QuestService : Service() {
 
                 launch {
                     sharedQuestDataRepository.locationFlow.collect { locationStatus ->
-                        if (!locationStatus.isLocationEnabled || locationStatus.location == null)
+                        if (!locationStatus.isLocationEnabled || locationStatus.location == null || sharedQuestDataRepository.quest?.finishedOn != null)
                             return@collect
 
                         val quest = sharedQuestDataRepository.quest
