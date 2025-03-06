@@ -85,7 +85,7 @@ class QuestRepoImpl @Inject constructor(
                 .await()
                 .documents
                 .shuffled()
-                .take(1) // TODO!!!
+                .take(5)
                 .map { it.toObject(Place::class.java)!!.apply { id = it.id } }
 
             val questions = mutableMapOf<String, Question>()
