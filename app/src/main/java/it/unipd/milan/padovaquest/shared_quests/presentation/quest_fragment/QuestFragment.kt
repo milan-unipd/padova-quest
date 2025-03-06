@@ -66,7 +66,7 @@ class QuestFragment : MapFragment() {
             val quest = sharedQuestDataRepository.quest
 
             if (quest?.id == null)
-                return@launch //TODO mozda jos nesto ovde treba da se uradi
+                return@launch
 
             quest.places.forEach { place ->
                 val icon = if (place.visited) {

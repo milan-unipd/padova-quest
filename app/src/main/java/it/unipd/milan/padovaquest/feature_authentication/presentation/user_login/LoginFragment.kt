@@ -136,7 +136,6 @@ class LoginFragment : Fragment(), PermissionsHelper.PermissionCallback {
         }
 
         binding.forgotPasswordBtn.setOnClickListener {
-            //TODO: Sta se radi ako si sa google nalogom napravio nalog, kakav crni pswrd reset
             val email = binding.usernameEditText.text.toString().trim()
             if (email.isNotEmpty()) {
                 FirebaseAuth.getInstance().sendPasswordResetEmail(email)
