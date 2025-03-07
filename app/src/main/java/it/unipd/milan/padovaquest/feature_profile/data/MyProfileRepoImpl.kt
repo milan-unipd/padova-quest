@@ -124,9 +124,18 @@ class MyProfileRepoImpl @Inject constructor(
                     .get(Source.SERVER)
                     .await()
 
-                if ((participantSnapshot.get("answers") as Map<*, *>).entries.size == quest.questions.size) {
-                    finishTimes[participant.id!!] = documentSnapshot.getDate("finishedOn")
+                val finishedOn = participantSnapshot.getDate("finishedOn")
+
+                if (finishedOn != null) {
+                    if ((participantSnapshot.get("answers") as Map<*, *>).entries.size == quest.questions.size) {
+                        finishTimes[participant.id!!] = finishedOn
+                    } else {
+                        finishTimes[participant.id!!] = Date(0)
+                    }
+                } else {
+                    finishTimes[participant.id!!] = null
                 }
+
                 users.add(participant)
 
             }

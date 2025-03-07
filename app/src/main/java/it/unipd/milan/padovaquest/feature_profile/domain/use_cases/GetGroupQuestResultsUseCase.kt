@@ -8,6 +8,7 @@ import it.unipd.milan.padovaquest.shared_quests.domain.model.Person
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
@@ -29,32 +30,38 @@ class GetGroupQuestResultsUseCase @Inject constructor(
 
 
         val durations = mutableMapOf<String, Long?>()
+        val date0Time = Date(0).time
         questResultDataModel.finishTimes.entries.forEach {
             if (it.value == null) {
                 durations[it.key] = null
-            } else {
+            } else if (it.value!!.time != date0Time) {
                 durations[it.key] = it.value!!.time - questResultDataModel.createdOn.time
+            } else {
+                durations[it.key] = Long.MAX_VALUE
             }
         }
 
-        val sortedUsers = questResultDataModel.users.filter { durations.containsKey(it.id) }.sortedWith(
+        val sortedUsers = questResultDataModel.users.sortedWith(
             compareByDescending<Person> { it.numOfCorrectAnswers }
-                .thenBy { durations[it.id] ?: Long.MAX_VALUE }
-        ).map { user ->
-            "${questResultDataModel.users.indexOf(user) + 1}. " +
-                    "${user.name}\n\t\t " +
-                    "Correct answers: ${user.numOfCorrectAnswers}\n\t\t " +
-                    "Time: ${formatDuration(durations[user.id])}"
-        }.toMutableList()
+                .thenBy { durations[it.id] ?: Long.MAX_VALUE },
 
-        questResultDataModel.users.filter { !durations.containsKey(it.id) }.forEach { user ->
-            sortedUsers.add(
+            ).map { user ->
+            if (durations[user.id] == null) {
+                "${questResultDataModel.users.indexOf(user) + 1}. " +
+                        "${user.name}\n\t\t " +
+                        "Still playing"
+
+            } else if (durations[user.id] != Long.MAX_VALUE) {
+                "${questResultDataModel.users.indexOf(user) + 1}. " +
+                        "${user.name}\n\t\t " +
+                        "Correct answers: ${user.numOfCorrectAnswers}\n\t\t " +
+                        "Time: ${formatDuration(durations[user.id])}"
+            } else {
                 "${questResultDataModel.users.indexOf(user) + 1}. " +
                         "${user.name}\n\t\t " +
                         "Dropped out"
-            )
-
-        }
+            }
+        }.toMutableList()
 
 
         val groupQuestResult = GroupQuestResult(
