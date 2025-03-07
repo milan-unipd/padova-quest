@@ -24,10 +24,12 @@
         tools:targetApi="31">
 
         <activity
+            android:screenOrientation="userPortrait"
             android:name=".feature_profile.presentation.my_quests.group.GroupQuestResultsActivity"
             android:exported="false"
             android:label="@string/groupquestresultsactivity" />
         <activity
+            android:screenOrientation="userPortrait"
             android:name=".feature_profile.presentation.ProfileActivity"
             android:exported="false"
             android:label="@string/title_activity_profile" />
@@ -37,10 +39,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:screenOrientation="userPortrait"
             android:name=".core.presentation.BaseActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
+            android:screenOrientation="userPortrait"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
