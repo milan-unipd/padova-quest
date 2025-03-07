@@ -40,8 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textEmailAddress"
-            android:lines="1"
-            android:text="m@m.com" />
+            android:lines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -64,8 +63,7 @@
             android:id="@+id/password_editText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPassword"
-            android:text="milan1" />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
