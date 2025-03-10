@@ -134,8 +134,8 @@ abstract class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setupMenuListener() {
-        drawerLayout = activity?.findViewById<DrawerLayout>(R.id.main)
-        navigationView = drawerLayout?.findViewById<NavigationView>(R.id.navigation_view)
+        drawerLayout = activity?.findViewById(R.id.main)
+        navigationView = drawerLayout?.findViewById(R.id.navigation_view)
 
         navigationView?.setNavigationItemSelectedListener { item ->
             onSideMenuItemClicked(item)

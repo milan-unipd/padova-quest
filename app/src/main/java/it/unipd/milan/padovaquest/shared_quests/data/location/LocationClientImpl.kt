@@ -62,7 +62,7 @@ class LocationClientImpl @Inject constructor(
         context.registerReceiver(locationProviderChangedReceiver, IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION))
         locationFlow.tryEmit(LocationStatus(lastLocation, isLocationEnabled))
         val locationRequest = LocationRequest.Builder(interval)
-            //.setMinUpdateDistanceMeters(5f)
+            .setMinUpdateDistanceMeters(5f)
             .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
             .build()
 

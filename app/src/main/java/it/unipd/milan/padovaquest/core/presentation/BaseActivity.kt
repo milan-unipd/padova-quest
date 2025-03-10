@@ -18,9 +18,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import it.unipd.milan.padovaquest.R
+import it.unipd.milan.padovaquest.core.util.ConnectivityObserver
 import it.unipd.milan.padovaquest.databinding.ActivityBaseBinding
 import it.unipd.milan.padovaquest.shared_quests.presentation.service.QuestService
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class BaseActivity : AppCompatActivity() {
@@ -28,7 +30,8 @@ class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
     private val viewModel: BaseViewModel by viewModels()
 
-    private lateinit var networkObserver: ConnectivityObserver
+    @Inject
+    lateinit var networkObserver: ConnectivityObserver
 
     override fun onResume() {
         super.onResume()
@@ -82,7 +85,6 @@ class BaseActivity : AppCompatActivity() {
                 }
             }
             launch {
-                networkObserver = ConnectivityObserver(applicationContext)
                 networkObserver.networkStatusFlow.collect { isConnected ->
                     runOnUiThread {
                         if (isConnected) {

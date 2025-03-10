@@ -13,6 +13,11 @@ class GetNearestPlaceUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(location: Location, quest: Quest?): Place? =
         withContext(Dispatchers.IO) {
-            return@withContext placesRepository.getNearPlace(location, quest)
+            return@withContext try {
+                placesRepository.getNearPlace(location, quest)
+            } catch (e: Exception) {
+                null
+            }
+
         }
 }

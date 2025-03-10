@@ -3,6 +3,8 @@ package it.unipd.milan.padovaquest.feature_group_quest.data
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Source
 import com.google.firebase.ktx.Firebase
 import it.unipd.milan.padovaquest.core.util.Resource
@@ -22,6 +24,8 @@ class GroupQuestRepoImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val questRepository: QuestRepository
 ) : GroupQuestRepository {
+
+    private var snapshotListener: ListenerRegistration? = null
 
     override suspend fun createGroupQuest(userID: String): Resource<Quest> {
         return try {
@@ -135,31 +139,34 @@ class GroupQuestRepoImpl @Inject constructor(
 
 
             CoroutineScope(Dispatchers.IO).launch {
-                launch {
-                    callbackFlow {
-                        val listener = firestore.collection("quests").document(questID)
-                            .addSnapshotListener { snapshot, error ->
-                                if (error != null) {
-                                    close(error) // Stop flow if error occurs
-                                    return@addSnapshotListener
-                                }
-                                if (snapshot != null && snapshot.exists()) {
-                                    trySend(snapshot.getString("status")) // Emit status updates
-                                } else {
-                                    close() // Quest deleted, stop flow
-                                }
+                callbackFlow {
+                    snapshotListener = firestore.collection("quests").document(questID)
+                        .addSnapshotListener { snapshot, error ->
+                            if (error != null) {
+                                close(error)
+                                onErrorAction(error)
+                                return@addSnapshotListener
                             }
 
-                        awaitClose { listener.remove() } // Remove listener when done
-                    }.collect { status ->
+                            if (snapshot?.exists() == true) {
+                                trySend(snapshot.getString("status"))
+                            } else {
+                                trySend("deleted")
+                                close() // Quest deleted, stop flow
+                            }
+                        }
+
+                    awaitClose {
+                        snapshotListener?.remove()
+                    } // Remove listener when done
+                }.collect { status ->
+                    if (status is String) {
                         if (status == "started") {
                             onQuestStartedAction()
+                        } else if (status == "deleted") {
+                            onQuestDeleteAction()
                         }
                     }
-
-                    // If flow closes, assume quest was deleted
-                    firestore.collection("users").document(userID).update("currentQuestID", null).await()
-                    onQuestDeleteAction()
                 }
             }
 
@@ -179,10 +186,14 @@ class GroupQuestRepoImpl @Inject constructor(
             batch.update(firestore.collection("users").document(userID), "currentQuestID", null)
 
             batch.commit().await()
-
+            snapshotListener?.remove()
             Resource.Success(Unit)
 
-        } catch (e: Exception) {
+        } catch (e: FirebaseFirestoreException) {
+            if (e.code == FirebaseFirestoreException.Code.NOT_FOUND) {
+                snapshotListener?.remove()
+                return Resource.Success(Unit)
+            }
             Resource.Error(e)
         }
     }
